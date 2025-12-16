@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Mobile Auth
-Description: Mobile login and register with OTP on one page.
+Description: Mobile login and register with OTP on one page, password setup for new users, and password reset via OTP.
 Version: 1.2
-Author: Milad
+Author: Milad karimi - sorush yasini
 */
 
 if (!defined('ABSPATH')) exit;
