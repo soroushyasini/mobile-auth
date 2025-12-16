@@ -75,7 +75,7 @@ add_action('wp_enqueue_scripts', function () {
             'mobile-auth-style',
             plugin_dir_url(__FILE__) . 'assets/style.css',
             [],
-            '1.2'
+            '1.2.1'
         );
     }
 });

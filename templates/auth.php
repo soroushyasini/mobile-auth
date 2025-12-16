@@ -31,15 +31,32 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
 
     <div class="ma_method_cards">
         <a href="<?php echo site_url('/auth?step=verify&mobile=' . urlencode($mobile)); ?>" class="ma_method_card">
-            <span class="ma_method_icon">📱</span>
-            <span class="ma_method_title">ارسال کد یکبار مصرف</span>
-            <span class="ma_method_desc">کد از طریق پیامک ارسال می‌شود</span>
+            <div class="ma_method_content">
+                <div class="ma_method_text">
+                    <span class="ma_method_title">ارسال کد یکبار مصرف</span>
+                    <span class="ma_method_desc">کد از طریق پیامک ارسال می‌شود</span>
+                </div>
+                <div class="ma_method_icon_compact">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                        <path d="M7 9h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"/>
+                    </svg>
+                </div>
+            </div>
         </a>
         
         <a href="<?php echo site_url('/auth?step=password&mobile=' . urlencode($mobile)); ?>" class="ma_method_card">
-            <span class="ma_method_icon">🔑</span>
-            <span class="ma_method_title">ورود با رمز عبور</span>
-            <span class="ma_method_desc">از رمز عبور خود استفاده کنید</span>
+            <div class="ma_method_content">
+                <div class="ma_method_text">
+                    <span class="ma_method_title">ورود با رمز عبور</span>
+                    <span class="ma_method_desc">ورود سریع بدون انتظار</span>
+                </div>
+                <div class="ma_method_icon_compact">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12.65 10C11.7 7.31 8.9 5.5 5.77 6.12c-2.29.46-4.15 2.29-4.63 4.58C.32 14.57 3.26 18 7 18c2.61 0 4.83-1.67 5.65-4H17v2c0 1.1.9 2 2 2s2-.9 2-2v-2c1.1 0 2-.9 2-2s-.9-2-2-2h-8.35zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                    </svg>
+                </div>
+            </div>
         </a>
     </div>
 
