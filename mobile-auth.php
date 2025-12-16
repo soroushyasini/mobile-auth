@@ -2,7 +2,7 @@
 /*
 Plugin Name: Mobile Auth
 Description: Mobile login and register with OTP on one page, password setup for new users, and password reset via OTP.
-Version: 1.2
+Version: 1.2.1
 Author: Milad karimi - sorush yasini
 */
 
@@ -254,6 +254,7 @@ add_action('init', function () {
         
         if ($user_id) {
             wp_set_password($password, $user_id);
+            update_user_meta($user_id, 'mobile_auth_has_password', '1');
             wp_redirect(site_url('/my-account/edit-account'));
             exit;
         }
@@ -281,7 +282,9 @@ add_action('init', function () {
         $user = get_user_by('id', $user_id);
         
         // Check if user has a password set
-        if (strpos($user->user_pass, '$P$') !== 0 && strpos($user->user_pass, '$2') !== 0) {
+        $has_password = get_user_meta($user_id, 'mobile_auth_has_password', true);
+        
+        if ($has_password !== '1') {
             wp_redirect(site_url('/auth?step=password&mobile=' . $mobile . '&err=no_password'));
             exit;
         }
@@ -371,6 +374,7 @@ add_action('init', function () {
         if ($user_id) {
             wp_set_password($new_password, $user_id);
             delete_transient('verified_reset_' . $mobile);
+            update_user_meta($user_id, 'mobile_auth_has_password', '1');
             
             wp_set_current_user($user_id);
             wp_set_auth_cookie($user_id);
