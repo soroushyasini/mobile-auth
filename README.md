@@ -111,7 +111,7 @@ $url = "https://api.kavenegar.com/v1/YOUR_API_KEY_HERE/verify/lookup. json?" .
 
 ---
 
-### Version 1.1.0 (2025-12-16)
+### Version 1.1.0 (2025-12-01)
 **Initial Release**
 
 #### Features
@@ -166,7 +166,7 @@ mobile-auth/
 
 ## 👨‍💻 Developer
 
-**Author:** Milad  
+**Author:** Milad Karimi ( Ver 1.1 ) Soroush Yasini ( Ver 1.2)
 **Version:** 1.2.0  
 **License:** GPL-2.0+
 
@@ -188,3 +188,4 @@ This plugin is licensed under the GPL-2.0+ License.
 ---
 
 **Made with ❤️ for WordPress**
+
