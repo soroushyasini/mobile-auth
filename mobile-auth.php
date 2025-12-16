@@ -284,7 +284,7 @@ add_action('init', function () {
         // Check if user has a password set
         $has_password = get_user_meta($user_id, 'mobile_auth_has_password', true);
         
-        if (!$has_password) {
+        if ($has_password !== '1') {
             wp_redirect(site_url('/auth?step=password&mobile=' . $mobile . '&err=no_password'));
             exit;
         }
