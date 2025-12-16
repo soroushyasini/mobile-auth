@@ -123,6 +123,54 @@
     box-shadow: none !important;
 }
 
+/* کارت‌های انتخاب روش ورود */
+.ma_method_cards {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    margin-top: 10px !important;
+}
+
+.ma_method_card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 25px 20px !important;
+    background-color: #f9fafb !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+}
+
+.ma_method_card:hover {
+    background-color: #ffffff !important;
+    border-color: #09375b !important;
+    box-shadow: 0 8px 20px rgba(9, 55, 91, 0.15) !important;
+    transform: translateY(-3px) !important;
+}
+
+.ma_method_icon {
+    font-size: 40px !important;
+    margin-bottom: 12px !important;
+}
+
+.ma_method_title {
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    color: #09375b !important;
+    margin-bottom: 8px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+
+.ma_method_desc {
+    font-size: 13px !important;
+    color: #6b7280 !important;
+    text-align: center !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+
 /* لینک‌های اضافی (مثل "فراموشی رمز عبور") */
 /*.ma_container a {*/
 /*    color: #09375b !important;*/
