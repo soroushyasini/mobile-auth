@@ -1,0 +1,184 @@
+/* ===== استایل فرم احراز هویت (Login/Register) ===== */
+
+.ma_container {
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 40px;
+    text-align: center;
+    
+    /* پس‌زمینه سفید با گوشه‌های گرد */
+    background-color: #ffffff !important;
+    border-radius: 25px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+    
+    /* کادر خارجی طوسی (مثل سایر صفحات) */
+    border: 1px solid #e5e7eb !important;
+}
+
+/* عنوان فرم */
+.ma_title {
+    font-size: 28px !important;
+    font-weight: 900 !important;
+    color: #09375b !important;
+    margin-bottom: 30px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+
+/* پیام خطا */
+.ma_error {
+    color: #dc2626 !important;
+    background-color: #fee2e2 !important;
+    border: 1px solid #fecaca !important;
+    border-radius: 15px !important;
+    padding: 12px 20px !important;
+    margin-bottom: 20px !important;
+    font-size: 14px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-weight: 600 !important;
+}
+
+/* فرم */
+.ma_form {
+    width: 100% !important;
+}
+
+/* فیلدهای ورودی */
+.ma_input {
+    width: 100% !important;
+    padding: 15px 20px !important;
+    margin: 12px 0 !important;
+    font-size: 15px !important;
+    
+    /* استایل مشابه فرم تماس */
+    background-color: #f3f4f6 !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 15px !important;
+    color: #09375b !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    
+    /* انیمیشن */
+    transition: all 0.3s ease !important;
+    
+    /* حذف outline پیش‌فرض */
+    outline: none !important;
+}
+
+/* حالت فوکوس فیلدها */
+.ma_input:focus {
+    background-color: #ffffff !important;
+    border-color: #09375b !important;
+    box-shadow: 0 0 0 3px rgba(9, 55, 91, 0.1) !important;
+}
+
+/* Placeholder */
+.ma_input::placeholder {
+    color: #9ca3af !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+}
+
+/* دکمه ارسال */
+.ma_button {
+    width: 100% !important;
+    padding: 15px 30px !important;
+    margin-top: 20px !important;
+    cursor: pointer !important;
+    
+    /* رنگ‌های اصلی سایت */
+    background-color: #09375b !important;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: 50px !important; /* کپسولی مثل دکمه‌های دیگر */
+    
+    /* تایپوگرافی */
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    
+    /* انیمیشن */
+    transition: all 0.3s ease !important;
+    
+    /* حذف outline */
+    outline: none !important;
+}
+
+/* حالت هاور دکمه */
+.ma_button:hover {
+    background-color: #062a45 !important; /* تیره‌تر */
+    transform: translateY(-2px) !important; /* بالا رفتن کمی */
+    box-shadow: 0 8px 20px rgba(9, 55, 91, 0.25) !important;
+}
+
+/* حالت فشردن دکمه */
+.ma_button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 4px 10px rgba(9, 55, 91, 0.2) !important;
+}
+
+/* حالت غیرفعال دکمه */
+.ma_button:disabled {
+    background-color: #d1d5db !important;
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* لینک‌های اضافی (مثل "فراموشی رمز عبور") */
+/*.ma_container a {*/
+/*    color: #09375b !important;*/
+/*    text-decoration: none !important;*/
+/*    font-weight: 600 !important;*/
+/*    font-family: 'Vazirmatn', sans-serif !important;*/
+/*    transition: color 0.3s ease !important;*/
+/*}*/
+
+.ma_container a:hover {
+    color: #ffcf00 !important;
+}
+
+/* پیام موفقیت (در صورت وجود) */
+.ma_success {
+    color: #065f46 !important;
+    background-color: #d1fae5 !important;
+    border: 1px solid #a7f3d0 !important;
+    border-radius: 15px !important;
+    padding: 12px 20px !important;
+    margin-bottom: 20px !important;
+    font-size: 14px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-weight: 600 !important;
+}
+
+/* ریسپانسیو - موبایل */
+@media (max-width: 768px) {
+    .ma_container {
+        max-width: 90% !important;
+        margin: 30px auto !important;
+        padding: 30px 20px !important;
+    }
+    
+    .ma_title {
+        font-size: 24px !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .ma_input {
+        padding: 12px 15px !important;
+        font-size: 14px !important;
+    }
+    
+    .ma_button {
+        padding: 13px 25px !important;
+        font-size: 15px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .ma_container {
+        padding: 25px 15px !important;
+    }
+    
+    .ma_title {
+        font-size: 20px !important;
+    }
+}
