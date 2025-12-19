@@ -113,13 +113,85 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
     
     <?php if (isset($_GET['err']) && $_GET['err'] == 'wrong_code'): ?>
         <p class="ma_error">کد تایید اشتباه است</p>
+    <?php elseif (isset($_GET['err']) && $_GET['err'] == 'rate_limit'): ?>
+        <?php
+        $remaining = isset($_GET['remaining']) ? intval($_GET['remaining']) : 0;
+        $minutes = floor($remaining / 60);
+        $seconds = $remaining % 60;
+        ?>
+        <p class="ma_error">لطفا <?php echo $minutes; ?>:<?php echo str_pad($seconds, 2, '0', STR_PAD_LEFT); ?> دقیقه صبر کنید</p>
     <?php endif; ?>
+
+    <?php
+    // Check if there's an active rate limit
+    $mobile_clean = convert_persian_numbers($mobile);
+    $last_request = get_transient('otp_rate_limit_' . $mobile_clean);
+    $show_countdown = false;
+    $remaining_seconds = 0;
+    
+    if ($last_request !== false) {
+        $remaining_seconds = 90 - (time() - $last_request);
+        if ($remaining_seconds > 0) {
+            $show_countdown = true;
+        }
+    }
+    ?>
 
     <form method="post" class="ma_form">
         <input type="hidden" name="mobile" value="<?php echo esc_attr($mobile); ?>">
         <input type="text" name="code" placeholder="کد 6 رقمی" required class="ma_input">
         <button type="submit" name="verify_reset_code" class="ma_button">تایید کد</button>
     </form>
+
+    <?php if ($show_countdown): ?>
+        <div class="ma_countdown_container" id="countdown-container-reset">
+            <p class="ma_countdown_text">درخواست مجدد کد پس از: <span id="countdown-timer-reset" class="ma_countdown_timer"></span></p>
+        </div>
+    <?php else: ?>
+        <div class="ma_resend_container">
+            <form method="post" style="display: inline;">
+                <input type="hidden" name="mobile" value="<?php echo esc_attr($mobile); ?>">
+                <button type="submit" name="send_reset_otp" class="ma_resend_button">ارسال مجدد کد</button>
+            </form>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($show_countdown): ?>
+    <script>
+    (function() {
+        var remainingSeconds = <?php echo $remaining_seconds; ?>;
+        var countdownElement = document.getElementById('countdown-timer-reset');
+        var containerElement = document.getElementById('countdown-container-reset');
+        
+        function convertToPersianNumber(num) {
+            var persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return num.toString().split('').map(function(digit) {
+                return persianDigits[parseInt(digit)];
+            }).join('');
+        }
+        
+        function updateCountdown() {
+            if (remainingSeconds <= 0) {
+                // Countdown finished - show resend button
+                containerElement.innerHTML = '<div class="ma_resend_container"><form method="post" style="display: inline;"><input type="hidden" name="mobile" value="<?php echo esc_attr($mobile); ?>"><button type="submit" name="send_reset_otp" class="ma_resend_button">ارسال مجدد کد</button></form></div>';
+                return;
+            }
+            
+            var minutes = Math.floor(remainingSeconds / 60);
+            var seconds = remainingSeconds % 60;
+            var timeString = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            var persianTimeString = convertToPersianNumber(timeString);
+            
+            countdownElement.textContent = persianTimeString;
+            remainingSeconds--;
+            
+            setTimeout(updateCountdown, 1000);
+        }
+        
+        updateCountdown();
+    })();
+    </script>
+    <?php endif; ?>
 
 <?php elseif ($step === 'new_password'): ?>
 
@@ -146,13 +218,82 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
 
     <?php if (isset($_GET['err']) && $_GET['err'] == 'wrong'): ?>
         <p class="ma_error">کد درست نيست</p>
+    <?php elseif (isset($_GET['err']) && $_GET['err'] == 'rate_limit'): ?>
+        <?php
+        $remaining = isset($_GET['remaining']) ? intval($_GET['remaining']) : 0;
+        $minutes = floor($remaining / 60);
+        $seconds = $remaining % 60;
+        ?>
+        <p class="ma_error">لطفا <?php echo $minutes; ?>:<?php echo str_pad($seconds, 2, '0', STR_PAD_LEFT); ?> دقیقه صبر کنید</p>
     <?php endif; ?>
+
+    <?php
+    // Check if there's an active rate limit
+    $mobile_clean = convert_persian_numbers($mobile);
+    $last_request = get_transient('otp_rate_limit_' . $mobile_clean);
+    $show_countdown = false;
+    $remaining_seconds = 0;
+    
+    if ($last_request !== false) {
+        $remaining_seconds = 90 - (time() - $last_request);
+        if ($remaining_seconds > 0) {
+            $show_countdown = true;
+        }
+    }
+    ?>
 
     <form method="post" class="ma_form">
         <input type="hidden" name="mobile" value="<?php echo $mobile; ?>">
         <input type="text" name="code" placeholder="کد 6 رقمي" required class="ma_input">
         <button type="submit" name="verify_otp" class="ma_button">تاييد</button>
     </form>
+
+    <?php if ($show_countdown): ?>
+        <div class="ma_countdown_container" id="countdown-container">
+            <p class="ma_countdown_text">درخواست مجدد کد پس از: <span id="countdown-timer" class="ma_countdown_timer"></span></p>
+        </div>
+    <?php else: ?>
+        <div class="ma_resend_container">
+            <a href="<?php echo site_url('/auth?step=verify&mobile=' . urlencode($mobile)); ?>" class="ma_resend_link">ارسال مجدد کد</a>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($show_countdown): ?>
+    <script>
+    (function() {
+        var remainingSeconds = <?php echo $remaining_seconds; ?>;
+        var countdownElement = document.getElementById('countdown-timer');
+        var containerElement = document.getElementById('countdown-container');
+        
+        function convertToPersianNumber(num) {
+            var persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+            return num.toString().split('').map(function(digit) {
+                return persianDigits[parseInt(digit)];
+            }).join('');
+        }
+        
+        function updateCountdown() {
+            if (remainingSeconds <= 0) {
+                // Countdown finished - show resend button
+                containerElement.innerHTML = '<div class="ma_resend_container"><a href="<?php echo site_url('/auth?step=verify&mobile=' . urlencode($mobile)); ?>" class="ma_resend_link">ارسال مجدد کد</a></div>';
+                return;
+            }
+            
+            var minutes = Math.floor(remainingSeconds / 60);
+            var seconds = remainingSeconds % 60;
+            var timeString = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+            var persianTimeString = convertToPersianNumber(timeString);
+            
+            countdownElement.textContent = persianTimeString;
+            remainingSeconds--;
+            
+            setTimeout(updateCountdown, 1000);
+        }
+        
+        updateCountdown();
+    })();
+    </script>
+    <?php endif; ?>
 
 <?php endif; ?>
 

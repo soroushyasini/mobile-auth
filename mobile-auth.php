@@ -104,8 +104,16 @@ add_action('template_redirect', function () {
         
         // Check if OTP already exists for this mobile
         if (!get_transient('otp_' . $mobile)) {
+            // Check rate limit
+            $remaining = check_otp_rate_limit($mobile);
+            if ($remaining > 0) {
+                wp_redirect(site_url('/auth?step=verify&mobile=' . $mobile . '&err=rate_limit&remaining=' . $remaining));
+                exit;
+            }
+            
             $code = rand(100000, 999999);
             set_transient('otp_' . $mobile, $code, 180);
+            set_otp_rate_limit($mobile);
             send_otp_sms($mobile, $code);
         }
     }
@@ -123,6 +131,8 @@ function is_valid_mobile($mobile) {
 }
 
 function send_otp_sms($mobile, $code) {
+    // 3-second delay before making API request
+    sleep(3);
 
     $url = "https://api.kavenegar.com/v1/75414544654B737133454E4A6D336D485645346C797A43356D676B6648632B5736372B384E524A4E4954343D/verify/lookup.json?" .
         http_build_query([
@@ -132,6 +142,23 @@ function send_otp_sms($mobile, $code) {
         ]);
 
     wp_remote_get($url);
+}
+
+function check_otp_rate_limit($mobile) {
+    $last_request = get_transient('otp_rate_limit_' . $mobile);
+    
+    if ($last_request !== false) {
+        $remaining = 90 - (time() - $last_request);
+        if ($remaining > 0) {
+            return $remaining;
+        }
+    }
+    
+    return 0;
+}
+
+function set_otp_rate_limit($mobile) {
+    set_transient('otp_rate_limit_' . $mobile, time(), 90);
 }
 
 add_action('init', function () {
@@ -160,8 +187,16 @@ add_action('init', function () {
         }
 
         // New user - send OTP directly
+        // Check rate limit
+        $remaining = check_otp_rate_limit($mobile);
+        if ($remaining > 0) {
+            wp_redirect(site_url('/auth?step=verify&mobile=' . $mobile . '&err=rate_limit&remaining=' . $remaining));
+            exit;
+        }
+        
         $code = rand(100000, 999999);
         set_transient('otp_' . $mobile, $code, 180);
+        set_otp_rate_limit($mobile);
 
         send_otp_sms($mobile, $code);
 
@@ -313,8 +348,16 @@ add_action('init', function () {
         $mobile = sanitize_text_field($_POST['mobile']);
         $mobile = convert_persian_numbers($mobile);
         
+        // Check rate limit
+        $remaining = check_otp_rate_limit($mobile);
+        if ($remaining > 0) {
+            wp_redirect(site_url('/auth?step=reset_password&mobile=' . $mobile . '&err=rate_limit&remaining=' . $remaining));
+            exit;
+        }
+        
         $code = rand(100000, 999999);
         set_transient('reset_otp_' . $mobile, $code, 180);
+        set_otp_rate_limit($mobile);
         
         send_otp_sms($mobile, $code);
         

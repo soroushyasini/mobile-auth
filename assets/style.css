@@ -1,5 +1,69 @@
 /* ===== استایل فرم احراز هویت (Login/Register) ===== */
 
+/* Countdown Timer Styles */
+.ma_countdown_container {
+    margin-top: 20px !important;
+    text-align: center !important;
+}
+
+.ma_countdown_text {
+    color: #6b7280 !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-size: 14px !important;
+    margin: 0 !important;
+}
+
+.ma_countdown_timer {
+    color: #09375b !important;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    direction: ltr !important;
+    display: inline-block !important;
+}
+
+.ma_resend_container {
+    margin-top: 20px !important;
+    text-align: center !important;
+}
+
+.ma_resend_link {
+    color: #09375b !important;
+    text-decoration: none !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    transition: color 0.3s ease !important;
+    display: inline-block !important;
+    padding: 10px 20px !important;
+    border: 2px solid #09375b !important;
+    border-radius: 50px !important;
+    background-color: transparent !important;
+}
+
+.ma_resend_link:hover {
+    color: #ffffff !important;
+    background-color: #09375b !important;
+}
+
+.ma_resend_button {
+    color: #09375b !important;
+    background-color: transparent !important;
+    border: 2px solid #09375b !important;
+    border-radius: 50px !important;
+    padding: 10px 20px !important;
+    font-family: 'Vazirmatn', sans-serif !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.ma_resend_button:hover {
+    color: #ffffff !important;
+    background-color: #09375b !important;
+}
+
 .ma_container {
     max-width: 450px;
     margin: 60px auto;
