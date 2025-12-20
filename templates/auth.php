@@ -178,7 +178,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
             }
             
             // Simple format: just show seconds with "ثانیه"
-            var persianTimeString = convertToPersianNumber(remainingSeconds) + ' ثانیه';
+            var persianTimeString = ' ثانیه' + convertToPersianNumber(remainingSeconds);
             
             countdownElement.textContent = persianTimeString;
             remainingSeconds--;
@@ -278,7 +278,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
             }
             
             // Simple format: just show seconds with "ثانیه"
-            var persianTimeString = convertToPersianNumber(remainingSeconds) + ' ثانیه';
+            var persianTimeString = ' ثانیه'+ convertToPersianNumber(remainingSeconds);
             
             countdownElement.textContent = persianTimeString;
             remainingSeconds--;
