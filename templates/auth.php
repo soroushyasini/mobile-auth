@@ -178,7 +178,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
             }
             
             // Simple format: just show seconds with "ثانیه"
-            var persianTimeString = ' ثانیه' + convertToPersianNumber(remainingSeconds);
+            var persianTimeString = ' ثانیه ' + convertToPersianNumber(remainingSeconds);
             
             countdownElement.textContent = persianTimeString;
             remainingSeconds--;
@@ -212,7 +212,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
 
 <?php elseif ($step === 'verify'): ?>
 
-    <h2 class="ma_title">کد ارسال شده را وارد کن</h2>
+    <h2 class="ma_title">کد ارسال شده را وارد کنید</h2>
 
     <?php if (isset($_GET['err']) && $_GET['err'] == 'wrong'): ?>
         <p class="ma_error">کد درست نيست</p>
@@ -278,7 +278,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
             }
             
             // Simple format: just show seconds with "ثانیه"
-            var persianTimeString = ' ثانیه'+ convertToPersianNumber(remainingSeconds);
+            var persianTimeString = ' ثانیه '+ convertToPersianNumber(remainingSeconds);
             
             countdownElement.textContent = persianTimeString;
             remainingSeconds--;
