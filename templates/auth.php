@@ -130,7 +130,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
     $remaining_seconds = 0;
     
     if ($last_request !== false) {
-        $remaining_seconds = 90 - (time() - $last_request);
+        $remaining_seconds = 60 - (time() - $last_request);
         if ($remaining_seconds > 0) {
             $show_countdown = true;
         }
@@ -177,10 +177,8 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
                 return;
             }
             
-            var minutes = Math.floor(remainingSeconds / 60);
-            var seconds = remainingSeconds % 60;
-            var timeString = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-            var persianTimeString = convertToPersianNumber(timeString);
+            // Simple format: just show seconds with "ثانیه"
+            var persianTimeString = convertToPersianNumber(remainingSeconds) + ' ثانیه';
             
             countdownElement.textContent = persianTimeString;
             remainingSeconds--;
@@ -235,7 +233,7 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
     $remaining_seconds = 0;
     
     if ($last_request !== false) {
-        $remaining_seconds = 90 - (time() - $last_request);
+        $remaining_seconds = 60 - (time() - $last_request);
         if ($remaining_seconds > 0) {
             $show_countdown = true;
         }
@@ -279,10 +277,8 @@ $mobile = isset($_GET['mobile']) ? sanitize_text_field($_GET['mobile']) : '';
                 return;
             }
             
-            var minutes = Math.floor(remainingSeconds / 60);
-            var seconds = remainingSeconds % 60;
-            var timeString = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-            var persianTimeString = convertToPersianNumber(timeString);
+            // Simple format: just show seconds with "ثانیه"
+            var persianTimeString = convertToPersianNumber(remainingSeconds) + ' ثانیه';
             
             countdownElement.textContent = persianTimeString;
             remainingSeconds--;

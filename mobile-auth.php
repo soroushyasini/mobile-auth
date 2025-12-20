@@ -148,7 +148,7 @@ function check_otp_rate_limit($mobile) {
     $last_request = get_transient('otp_rate_limit_' . $mobile);
     
     if ($last_request !== false) {
-        $remaining = 90 - (time() - $last_request);
+        $remaining = 60 - (time() - $last_request);
         if ($remaining > 0) {
             return $remaining;
         }
@@ -158,7 +158,7 @@ function check_otp_rate_limit($mobile) {
 }
 
 function set_otp_rate_limit($mobile) {
-    set_transient('otp_rate_limit_' . $mobile, time(), 90);
+    set_transient('otp_rate_limit_' . $mobile, time(), 60);
 }
 
 add_action('init', function () {
